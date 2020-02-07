@@ -27,8 +27,9 @@ if ASYNC is non-nil, runs asynchronously"
   (let ((code `((sleep (parse-time ,amount ,duration))
 		,@body)))
     (if async
-	`(bt:make-thread
-	  (lambda () ,@code))
+	`(with-green-thread
+	   (thread-yield)
+	   ,@code)
 	`(progn ,@code))))
 
 (defmacro after-every ((amount duration &key async run-immediately) &body body)
@@ -40,8 +41,9 @@ if RUN-IMMEDIATELY is non-nil, runs BODY once before waiting for next invocation
 		     do (sleep (parse-time ,amount ,duration))
 		     ,@body)))
     (if async
-	`(bt:make-thread
-	  (lambda () ,code))
+	`(with-green-thread
+	   (thread-yield)
+	   ,code)
 	code)))
 
 (defun agetf (place indicator &optional default)

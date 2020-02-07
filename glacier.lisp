@@ -29,7 +29,9 @@ if BODY is not provided drops into a loop where we sleep until the user quits us
      (wsd:start-connection *websocket-client*)
        
      ,@(if body
-	   body
+	   `((with-green-thread
+	       ,@body
+	       (thread-yield)))
 	   '((loop do (sleep 5)
 		   while (eq (wsd:ready-state *websocket-client*) :open))))
 

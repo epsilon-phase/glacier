@@ -8,6 +8,9 @@
   (:import-from :alexandria
 		:hash-table-keys
 		:flatten)
+  (:import-from :green-threads
+		:with-green-thread
+		:thread-yield)
   (:export :run-bot
 	   :mastodon-bot
 	   :bot-on-update

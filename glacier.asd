@@ -7,7 +7,8 @@
   :version "0.3"
   :depends-on (#:dexador #:bordeaux-threads #:str
 	       #:websocket-driver #:simple-config #:cl-json
-	       #:tooter #:cl-ppcre #:alexandria)
+	       #:tooter #:cl-ppcre #:alexandria
+	       #:green-threads)
   :serial t
   :components ((:file "package")
 	       (:file "bot")
